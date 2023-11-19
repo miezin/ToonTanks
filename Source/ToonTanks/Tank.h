@@ -44,6 +44,13 @@ class TOONTANKS_API ATank : public ABasePawn
 
 	
 	protected:
+		UPROPERTY(EditAnywhere, Category = "Movement")
+		float Speed = 200.f;
+
+		UPROPERTY(EditAnywhere, Category = "Movement")
+		float TurnRate = 45.f;
+
+
 		/** Called for movement input */
 		void Move(const FInputActionValue& Value);
 

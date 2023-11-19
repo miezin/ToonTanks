@@ -6,6 +6,7 @@
 #include "Camera/CameraComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "Kismet/GameplayStatics.h"
 
 
 
@@ -60,8 +61,19 @@ void ATank::Move(const FInputActionValue& Value)
 {	
     if (Controller != nullptr)
 	{
-		UE_LOG(LogTemp, Display, TEXT("TANK: Move with CTRL"));
-    }
+		FVector2D AxisValue = Value.Get<FVector2D>();
+		
+		FVector DeltaLocation = FVector::ZeroVector;
+		FRotator DeltaRotation = FRotator::ZeroRotator;
+
+		// X = Value * DeltaTime * Speed
+    DeltaLocation.X = AxisValue.X * Speed * UGameplayStatics::GetWorldDeltaSeconds(this);
+    AddActorLocalOffset(DeltaLocation, true);
+
+		// Yaw = Value * DeltaTime * TurnRate
+    DeltaRotation.Yaw = AxisValue.Y * TurnRate * UGameplayStatics::GetWorldDeltaSeconds(this);
+    AddActorLocalRotation(DeltaRotation, true);  
+	}
 
 }
 
