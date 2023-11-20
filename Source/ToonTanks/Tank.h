@@ -39,8 +39,13 @@ class TOONTANKS_API ATank : public ABasePawn
 		UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 		UInputAction* FireAction;
 
+		APlayerController* PlayerControllerRef;
+
 	public:
 		ATank();
+
+		// Called every frame
+		virtual void Tick(float DeltaTime) override;
 
 	
 	protected:
@@ -53,9 +58,6 @@ class TOONTANKS_API ATank : public ABasePawn
 
 		/** Called for movement input */
 		void Move(const FInputActionValue& Value);
-
-		/** Called for movement input */
-		void Rotate(const FInputActionValue& Value);
 
 		/** Called for movement input */
 		void Fire(const FInputActionValue& Value);
