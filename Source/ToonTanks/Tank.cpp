@@ -60,7 +60,7 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ATank::Move);
 
         // Firing
-		EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Triggered, this, &ATank::Fire);
+		EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Started, this, &ATank::Fire);
 	}
 	else
 	{
@@ -72,7 +72,7 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 void ATank::Move(const FInputActionValue& Value)
 {	
-    if (Controller != nullptr)
+    if (Controller)
 	{
 		FVector2D AxisValue = Value.Get<FVector2D>();
 		
@@ -88,12 +88,4 @@ void ATank::Move(const FInputActionValue& Value)
 		AddActorLocalRotation(DeltaRotation, true);  
 	}
 
-}
-
-void ATank::Fire(const FInputActionValue& Value)
-{
-    if (Controller != nullptr)
-	{
-        
-    }
 }

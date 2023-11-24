@@ -59,9 +59,6 @@ class TOONTANKS_API ATank : public ABasePawn
 		/** Called for movement input */
 		void Move(const FInputActionValue& Value);
 
-		/** Called for movement input */
-		void Fire(const FInputActionValue& Value);
-
 	protected:
 		// Called to bind functionality to input
 		virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
