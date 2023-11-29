@@ -3,6 +3,7 @@
 
 #include "Projectile.h"
 #include "Components/StaticMeshComponent.h"
+#include "GameFramework/ProjectileMovementComponent.h"
 
 // Sets default values
 AProjectile::AProjectile()
@@ -13,6 +14,11 @@ AProjectile::AProjectile()
 	ProjectileMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Projectile Mesh"));
 	RootComponent = ProjectileMesh;
 
+	ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("Projectile Movement Component"));
+	ProjectileMovementComponent->MaxSpeed = 1300.f;
+	ProjectileMovementComponent->InitialSpeed = 1300.f;
+
+	ProjectileMesh->OnComponentHit.AddDynamic(this, &AProjectile::OnHit);
 }
 
 // Called when the game starts or when spawned
@@ -29,3 +35,7 @@ void AProjectile::Tick(float DeltaTime)
 
 }
 
+void AProjectile::OnHit(UPrimitiveComponent*HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
+{
+	UE_LOG(LogTemp, Warning, TEXT("On HIT"));
+}
