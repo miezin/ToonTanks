@@ -19,6 +19,8 @@ public:
 
 	virtual void Tick(float DeltaTime) override;
 
+	void HandleDestruction();
+
 protected:
 	// To add mapping context
 	virtual void BeginPlay() override;

@@ -39,13 +39,17 @@ class TOONTANKS_API ATank : public ABasePawn
 		UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 		UInputAction* FireAction;
 
-		APlayerController* PlayerControllerRef;
+		APlayerController* TankPlayerContoller;
 
 	public:
 		ATank();
 
 		// Called every frame
 		virtual void Tick(float DeltaTime) override;
+
+		void HandleDestruction();
+
+		APlayerController* GetTankPlayerController() const { return TankPlayerContoller; };
 
 	
 	protected:

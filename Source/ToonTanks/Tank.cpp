@@ -24,11 +24,11 @@ void ATank::BeginPlay()
 	// Call the base class  
 	Super::BeginPlay();
 	//Add Input Mapping Context
-	PlayerControllerRef = Cast<APlayerController>(GetController());
-	if (PlayerControllerRef)
+	TankPlayerContoller = Cast<APlayerController>(GetController());
+	if (TankPlayerContoller)
 	{	
 
-		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerControllerRef->GetLocalPlayer()))
+		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(TankPlayerContoller->GetLocalPlayer()))
 		{	
 			Subsystem->AddMappingContext(DefaultMappingContext, 0);
 		}
@@ -40,15 +40,22 @@ void ATank::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if (PlayerControllerRef)
+	if (TankPlayerContoller)
 	{	
 		FHitResult HitResult;
-		PlayerControllerRef->GetHitResultUnderCursor(ECollisionChannel::ECC_Visibility, false, HitResult);
+		TankPlayerContoller->GetHitResultUnderCursor(ECollisionChannel::ECC_Visibility, false, HitResult);
 
 		RotateTurret(HitResult.ImpactPoint);
 
 	}
 
+}
+
+void ATank::HandleDestruction()
+{
+	Super::HandleDestruction();
+	SetActorHiddenInGame(true);
+	SetActorTickEnabled(false);
 }
 
 // Called to bind functionality to input
