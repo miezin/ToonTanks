@@ -6,6 +6,7 @@
 #include "Tank.h"
 #include "Tower.h"
 #include "ToonTanksPlayerController.h"
+#include "TimerManager.h"
 
 void AToonTanksGameMode::BeginPlay()
 {
@@ -46,7 +47,7 @@ void AToonTanksGameMode::HandleGameStart()
         FTimerHandle PlayerEnableTimerHandler;
         FTimerDelegate PlayerEnableTimerDelegate = FTimerDelegate::CreateUObject(
             ToonTanksPlayerController,
-            AToonTanksPlayerController::SetPlayerEnabledState,
+            &AToonTanksPlayerController::SetPlayerEnabledState,
             true
         );
         GetWorldTimerManager().SetTimer(
