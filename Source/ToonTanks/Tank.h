@@ -51,6 +51,8 @@ class TOONTANKS_API ATank : public ABasePawn
 
 		APlayerController* GetTankPlayerController() const { return TankPlayerContoller; };
 
+		bool bAlive = true;
+
 	
 	protected:
 		UPROPERTY(EditAnywhere, Category = "Movement")
