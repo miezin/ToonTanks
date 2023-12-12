@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "HealthBarWidgetComponent.h"
 #include "HealthComponent.generated.h"
 
 
@@ -15,6 +16,9 @@ class TOONTANKS_API UHealthComponent : public UActorComponent
 public:	
 	// Sets default values for this component's properties
 	UHealthComponent();
+
+	float GetHealth() { return Health; }
+	float GetMaxHealth() { return MaxHealth; }
 
 protected:
 	// Called when the game starts
@@ -29,6 +33,8 @@ private:
 	void DamageTaken(AActor* DamagedActor, float Damage, const UDamageType* DamageType, class AController* Instigator, AActor* DamageCauser);
 
 	class AToonTanksGameMode* ToonTanksGameMode;
+
+	UHealthBarWidgetComponent* HealthBarWidgetComponent;
 
 public:	
 	// Called every frame

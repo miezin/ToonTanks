@@ -18,8 +18,9 @@ AProjectile::AProjectile()
 	RootComponent = ProjectileMesh;
 
 	ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("Projectile Movement Component"));
-	ProjectileMovementComponent->MaxSpeed = 2000.f;
-	ProjectileMovementComponent->InitialSpeed = 2000.f;
+	ProjectileMovementComponent->MaxSpeed = 5000.f;
+	ProjectileMovementComponent->InitialSpeed = 4000.f;
+	
 
 	TrailParticles = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("Smoke Trail"));
 	TrailParticles->SetupAttachment(RootComponent);
